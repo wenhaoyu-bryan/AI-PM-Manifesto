@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
+import ontologyShot from "@/assets/proof/prompt-to-ontology.png";
+import playbookShot from "@/assets/proof/ai-pm-playbook.png";
 
 const PORTFOLIO = "https://wenhaoyu-bryan.github.io";
 
@@ -167,6 +170,20 @@ const quotes = [
           Read the case study
         </a>
       </div>
+      <div class="mt-14" data-reveal>
+        <div
+          class="overflow-hidden rounded-xl border border-white/10 shadow-[0_50px_140px_-30px_rgba(255,107,53,0.35)]"
+        >
+          <Image
+            src={ontologyShot}
+            alt="Prompt-to-Ontology operational runtime dashboard"
+            widths={[640, 1000, 1600]}
+            sizes="(min-width: 1024px) 960px, 92vw"
+            class="w-full"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </section>
 
     <!-- 5 · PROOF II -->
@@ -195,6 +212,20 @@ const quotes = [
         >
           Open the Playbook &rarr;
         </a>
+      </div>
+      <div class="mt-14" data-reveal>
+        <div
+          class="overflow-hidden rounded-xl border border-white/10 shadow-[0_50px_140px_-30px_rgba(255,107,53,0.35)]"
+        >
+          <Image
+            src={playbookShot}
+            alt="AI PM Operating Playbook landing page"
+            widths={[640, 1000, 1600]}
+            sizes="(min-width: 1024px) 960px, 92vw"
+            class="w-full"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
 
