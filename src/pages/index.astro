@@ -1,0 +1,296 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const PORTFOLIO = "https://wenhaoyu-bryan.github.io";
+
+const method = [
+  {
+    n: "01",
+    title: "Frame the ambiguity",
+    body: "Turn a vague problem into a structured concept — the entities, relationships, and constraints the business actually runs on.",
+  },
+  {
+    n: "02",
+    title: "Design the system",
+    body: "Decide what the model does, what the agent is allowed to do, and where the human stays in the loop. Architecture is a product decision.",
+  },
+  {
+    n: "03",
+    title: "Build with AI",
+    body: "Vibe-code working prototypes with coding agents. The harness — context, tools, constraints, feedback — matters more than the keystrokes.",
+  },
+  {
+    n: "04",
+    title: "Extract the pattern",
+    body: "Turn each build into reusable methodology, so the next problem starts further ahead than the last.",
+  },
+];
+
+const quotes = [
+  {
+    text: "A knowledge graph without action buttons is just a pretty picture.",
+    href: `${PORTFOLIO}/posts/building-ontology-os/`,
+    source: "Building Ontology OS",
+  },
+  {
+    text: "The agent generates the code. The harness makes sure it generates the right code.",
+    href: `${PORTFOLIO}/playbook/harness-engineering/`,
+    source: "Harness Engineering",
+  },
+  {
+    text: "Design the feedback loop, and the product starts improving itself.",
+    href: `${PORTFOLIO}/playbook/loop-engineering/`,
+    source: "Loop Engineering",
+  },
+];
+---
+
+<Base>
+  <!-- Ambient accent glows -->
+  <div
+    class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div
+      class="bg-accent/15 absolute -top-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full blur-[140px]"
+    >
+    </div>
+    <div
+      class="bg-accent/10 absolute top-[120%] left-[10%] size-[36rem] rounded-full blur-[160px]"
+    >
+    </div>
+  </div>
+
+  <main class="mx-auto w-full max-w-5xl px-6 sm:px-8">
+    <!-- 1 · HERO -->
+    <section
+      class="flex min-h-screen flex-col justify-center py-24"
+      data-hero
+    >
+      <p class="text-accent font-mono text-xs tracking-[0.25em] uppercase">
+        Wenhao&nbsp;Yu · AI Product Manager
+      </p>
+      <h1
+        class="mt-6 max-w-4xl text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
+      >
+        <span class="hero-line block">I turn ambiguous problems</span>
+        <span class="hero-line block">into AI products</span>
+        <span class="hero-line block">
+          that <span class="text-accent">ship</span>.
+        </span>
+      </h1>
+      <p
+        class="text-muted mt-8 max-w-xl text-lg text-pretty hero-sub sm:text-xl"
+      >
+        I design the system — the ontology, the agents, the guardrails — then
+        build it with AI.
+      </p>
+      <div class="hero-sub mt-14 flex items-center gap-3">
+        <span class="text-faint font-mono text-xs tracking-widest uppercase">
+          Scroll
+        </span>
+        <span class="bg-faint/40 relative h-px w-16 overflow-hidden">
+          <span class="bg-accent absolute inset-y-0 left-0 w-4 scroll-cue"
+          ></span>
+        </span>
+      </div>
+    </section>
+
+    <!-- 2 · THE SHIFT -->
+    <section class="border-t border-white/5 py-28 sm:py-36">
+      <h2
+        class="max-w-3xl text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl"
+        data-reveal
+      >
+        AI didn't replace the product manager. It changed what one can
+        <span class="text-accent">build</span>.
+      </h2>
+      <p class="text-muted mt-8 max-w-2xl text-lg leading-relaxed" data-reveal>
+        For years, a PM's job ended at the spec. Now the same person who frames
+        the problem can shape the working product — the data model, the agent
+        behavior, the interface. The gap between product thinking and shipped
+        software is collapsing. This page is proof of what that looks like.
+      </p>
+    </section>
+
+    <!-- 3 · THE METHOD -->
+    <section class="border-t border-white/5 py-28 sm:py-36">
+      <p
+        class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
+        data-reveal
+      >
+        How I work
+      </p>
+      <div class="mt-12 grid gap-px sm:grid-cols-2">
+        {
+          method.map(step => (
+            <div class="group py-8 sm:px-8" data-reveal>
+              <span class="text-faint font-mono text-sm">{step.n}</span>
+              <h3 class="mt-3 text-xl font-medium sm:text-2xl">{step.title}</h3>
+              <p class="text-muted mt-3 leading-relaxed">{step.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 4 · PROOF I -->
+    <section class="border-t border-white/5 py-28 sm:py-36">
+      <p
+        class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
+        data-reveal
+      >
+        Proof · 01
+      </p>
+      <h2
+        class="mt-5 text-3xl font-semibold tracking-tight sm:text-5xl"
+        data-reveal
+      >
+        Prompt-to-Ontology
+      </h2>
+      <p class="text-muted mt-6 max-w-2xl text-lg leading-relaxed" data-reveal>
+        Enterprise AI fails at the data model, not the model. I built a system
+        that turns raw CSVs into an operational knowledge graph with an agent
+        layer — ontology inference, Neo4j, and human-in-the-loop actions.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4" data-reveal>
+        <a
+          href={`${PORTFOLIO}/projects/ontology-graph/`}
+          class="bg-accent inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-[#05060a] transition-transform hover:-translate-y-0.5"
+        >
+          Explore the 3D graph &rarr;
+        </a>
+        <a
+          href={`${PORTFOLIO}/projects/prompt-to-ontology/`}
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium transition-colors hover:border-white/40"
+        >
+          Read the case study
+        </a>
+      </div>
+    </section>
+
+    <!-- 5 · PROOF II -->
+    <section class="border-t border-white/5 py-28 sm:py-36">
+      <p
+        class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
+        data-reveal
+      >
+        Proof · 02
+      </p>
+      <h2
+        class="mt-5 text-3xl font-semibold tracking-tight sm:text-5xl"
+        data-reveal
+      >
+        AI PM Operating Playbook
+      </h2>
+      <p class="text-muted mt-6 max-w-2xl text-lg leading-relaxed" data-reveal>
+        The method, turned into an interactive tool. Frame the problem, design
+        the AI workflow, define evaluation and human review — then export a
+        reusable handoff pack for your team or coding agent.
+      </p>
+      <div class="mt-8" data-reveal>
+        <a
+          href={`${PORTFOLIO}/AI-PM-Operating-Playbook/`}
+          class="bg-accent inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-[#05060a] transition-transform hover:-translate-y-0.5"
+        >
+          Open the Playbook &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- 6 · IN MY WORDS -->
+    <section class="border-t border-white/5 py-28 sm:py-36">
+      <p
+        class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
+        data-reveal
+      >
+        In my words
+      </p>
+      <div class="mt-12 space-y-12">
+        {
+          quotes.map(q => (
+            <a href={q.href} class="group block max-w-3xl" data-reveal>
+              <p class="text-2xl leading-snug font-light text-balance sm:text-3xl">
+                &ldquo;{q.text}&rdquo;
+              </p>
+              <span class="text-faint group-hover:text-accent mt-4 inline-block font-mono text-xs tracking-widest uppercase transition-colors">
+                {q.source} &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 7 · CLOSE -->
+    <section class="border-t border-white/5 py-28 sm:py-40">
+      <h2
+        class="text-4xl font-semibold tracking-tight text-balance sm:text-6xl"
+        data-reveal
+      >
+        Let's build something.
+      </h2>
+      <p class="text-muted mt-6 max-w-xl text-lg leading-relaxed" data-reveal>
+        I'm an AI PM who can frame the problem and ship the product. Open to
+        roles, collaborations, and early-stage ideas.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4" data-reveal>
+        <a
+          href={PORTFOLIO}
+          class="bg-accent inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-[#05060a] transition-transform hover:-translate-y-0.5"
+        >
+          View full portfolio &rarr;
+        </a>
+        <a
+          href="mailto:wenhaoyu.bryan@gmail.com"
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium transition-colors hover:border-white/40"
+        >
+          Email
+        </a>
+        <a
+          href="https://www.linkedin.com/in/wenhaoyu-bryan/"
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium transition-colors hover:border-white/40"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+      </div>
+      <p class="text-faint mt-16 font-mono text-xs">
+        Designed & built by Wenhao Yu with AI · {new Date().getFullYear()}
+      </p>
+    </section>
+  </main>
+
+  <script>
+    import { gsap } from "gsap";
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Hero intro: lines rise in, sub + cue fade up.
+    if (!prefersReduced) {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.from("[data-hero] .hero-line", {
+        yPercent: 120,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.12,
+      })
+        .from(
+          "[data-hero] .hero-sub",
+          { y: 24, opacity: 0, duration: 0.9, stagger: 0.15 },
+          "-=0.4"
+        );
+
+      // Looping scroll cue.
+      gsap.to(".scroll-cue", {
+        xPercent: 320,
+        duration: 1.6,
+        ease: "power1.inOut",
+        repeat: -1,
+      });
+    }
+  </script>
+</Base>
