@@ -73,6 +73,29 @@ const {
           }
         );
       });
+
+      // Subtle parallax: [data-parallax] drifts as it passes through the viewport.
+      // The element should sit in an overflow-clipped frame and be slightly
+      // scaled up so the drift never reveals an edge.
+      if (!prefersReduced) {
+        const parallax = gsap.utils.toArray<HTMLElement>("[data-parallax]");
+        parallax.forEach(el => {
+          gsap.fromTo(
+            el,
+            { yPercent: -5 },
+            {
+              yPercent: 5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+        });
+      }
     </script>
   </body>
 </html>
