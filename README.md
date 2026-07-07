@@ -19,9 +19,10 @@ frontend craft.
   substantive, not decorative.
 - **Concept:** "The Manifesto" — a cinematic scroll story with the arc
   _belief → method → proof → proof → voice → invitation_.
-- **Aesthetic:** dark cinematic — near-black canvas, one warm accent, large
-  light typography, filmic scroll-triggered motion. Deliberately contrasts the
-  restrained, flat portfolio site.
+- **Aesthetic:** an original "warm editorial paper" palette — warm parchment
+  canvas, warm near-black ink, a terracotta accent, large typography, and
+  scroll-triggered motion. Tuned to meet WCAG AA contrast. Not based on any
+  brand's visual identity.
 
 ## The seven beats
 

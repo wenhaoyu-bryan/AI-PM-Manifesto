@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
-/* Anthropic-inspired warm palette: ivory canvas, near-black ink, clay accent. */
+/* Original "warm editorial paper" palette — warm parchment canvas, warm ink,
+   terracotta accent. Not tied to any brand; tuned so every text pairing meets
+   WCAG AA contrast on the parchment background. */
 @theme {
-  --color-bg: #faf9f5;
-  --color-surface: #f2f0e9;
-  --color-fg: #141413;
-  --color-muted: #63615a;
-  --color-faint: #a3a199;
-  --color-line: #e4e1d7;
-  --color-accent: #d97757;
-  --color-accent-soft: #e2977f;
+  --color-bg: #f7f3ea;
+  --color-surface: #efe9dc;
+  --color-fg: #1f1b16;
+  --color-muted: #625e56;
+  --color-faint: #6d6a61;
+  --color-line: #e4ded1;
+  --color-accent: #a94e2c;
+  --color-accent-soft: #c26a45;
 
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
@@ -42,7 +44,7 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: #faf9f5;
+  color: #f7f3ea;
 }
 
 /* Respect users who prefer reduced motion. */
