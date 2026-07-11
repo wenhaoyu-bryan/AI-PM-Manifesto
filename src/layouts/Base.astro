@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import SiteHeader from "@/components/SiteHeader.astro";
 
 interface Props {
   title?: string;
@@ -33,6 +34,7 @@ const {
     />
   </head>
   <body>
+    <SiteHeader />
     <slot />
 
     <script>
@@ -52,6 +54,9 @@ const {
         lenis.on("scroll", ScrollTrigger.update);
         gsap.ticker.add(time => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
+        // Expose so the header's anchor links can request a smooth,
+        // header-offset scroll to any section.
+        (window as unknown as { __lenis?: unknown }).__lenis = lenis;
       }
 
       // Generic reveal-on-scroll: any [data-reveal] fades + rises into view.
