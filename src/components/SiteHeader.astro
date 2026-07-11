@@ -1,0 +1,230 @@
+---
+// Fixed editorial header for the single-page manifesto.
+// - Terracotta scroll-progress hairline along the very top edge.
+// - Parchment bar that stays invisible over the hero, then fades in a blurred
+//   background + hairline border once you start scrolling.
+// - In-page anchor nav (desktop inline, mobile full-screen overlay) that scrolls
+//   via Lenis when smooth-scroll is active, and highlights the current section.
+//
+// Nav items are data-driven so new sections are a one-line add here.
+const PORTFOLIO = "https://wenhaoyu-bryan.github.io";
+
+const links = [
+  { href: "#method", label: "Method" },
+  { href: "#proof", label: "Proof" },
+  { href: "#words", label: "Words" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+  <!-- Scroll progress hairline -->
+  <div class="h-[2px] w-full bg-transparent">
+    <div
+      id="scroll-progress"
+      class="bg-accent h-full w-full origin-left"
+      style="transform: scaleX(0);"
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+
+  <nav
+    id="site-nav"
+    class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 transition-colors duration-300 sm:px-8"
+    aria-label="Primary"
+  >
+    <a
+      href="#top"
+      data-nav
+      class="text-fg hover:text-accent font-mono text-xs tracking-[0.2em] uppercase transition-colors"
+    >
+      Wenhao&nbsp;Yu
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden items-center gap-8 sm:flex">
+      {
+        links.map(link => (
+          <a
+            href={link.href}
+            data-nav
+            class="nav-link text-muted hover:text-fg text-sm transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={PORTFOLIO}
+        class="border-fg/20 text-fg hover:border-fg/60 rounded-full border px-4 py-1.5 text-sm transition-colors"
+      >
+        Portfolio&nbsp;&nearr;
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="text-fg flex size-8 items-center justify-center sm:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="menu-bars relative block h-3 w-6">
+        <span
+          class="bg-fg absolute left-0 block h-[1.5px] w-full transition-transform duration-300"
+          style="top: 0;"></span>
+        <span
+          class="bg-fg absolute left-0 block h-[1.5px] w-full transition-transform duration-300"
+          style="bottom: 0;"></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- Mobile full-screen overlay menu -->
+  <div
+    id="mobile-menu"
+    class="bg-bg/98 invisible fixed inset-0 flex flex-col opacity-0 backdrop-blur-sm transition-opacity duration-300 sm:hidden"
+  >
+    <div class="flex flex-1 flex-col justify-center gap-2 px-8">
+      {
+        links.map((link, i) => (
+          <a
+            href={link.href}
+            data-nav
+            style={`transition-delay: ${i * 40}ms`}
+            class="border-line text-fg hover:text-accent border-b py-5 text-3xl font-medium tracking-tight transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={PORTFOLIO}
+        class="text-accent mt-8 font-mono text-xs tracking-[0.2em] uppercase"
+      >
+        View full portfolio &nearr;
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Bar background fades in only after leaving the hero. */
+  #site-nav.is-scrolled {
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Active section gets the terracotta ink + a small underline tick. */
+  .nav-link.is-active {
+    color: var(--color-fg);
+  }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 1.5px;
+    background: var(--color-accent);
+  }
+
+  /* Hamburger -> X when the overlay is open. */
+  #menu-toggle[aria-expanded="true"] .menu-bars span:first-child {
+    transform: translateY(5px) rotate(45deg);
+  }
+  #menu-toggle[aria-expanded="true"] .menu-bars span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  #mobile-menu.is-open {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-nav");
+  const progress = document.getElementById("scroll-progress");
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = Array.from(
+    document.querySelectorAll<HTMLElement>(".nav-link")
+  );
+
+  // --- Scrolled state + progress bar -------------------------------------
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      header?.classList.toggle("is-scrolled", y > 8);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? Math.min(y / max, 1) : 0;
+      if (progress) progress.style.transform = `scaleX(${pct})`;
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // --- Mobile overlay open/close -----------------------------------------
+  function setMenu(open: boolean) {
+    menu?.classList.toggle("is-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.documentElement.style.overflow = open ? "hidden" : "";
+  }
+  toggle?.addEventListener("click", () =>
+    setMenu(toggle.getAttribute("aria-expanded") !== "true")
+  );
+
+  // --- Smooth anchor scroll (Lenis-aware) --------------------------------
+  document.querySelectorAll<HTMLAnchorElement>("[data-nav]").forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return; // external links pass through
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      setMenu(false);
+      // Lenis (exposed from the layout) gives a smooth, header-offset scroll;
+      // fall back to native behavior when smooth-scroll is disabled.
+      const lenis = (window as unknown as { __lenis?: any }).__lenis;
+      if (lenis) lenis.scrollTo(target, { offset: -72 });
+      else target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // --- Active-section highlighting ---------------------------------------
+  const sections = navLinks
+    .map(l => document.querySelector(l.getAttribute("href") ?? ""))
+    .filter((s): s is Element => Boolean(s));
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = `#${entry.target.id}`;
+          navLinks.forEach(l =>
+            l.classList.toggle(
+              "is-active",
+              l.getAttribute("href") === id
+            )
+          );
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach(s => observer.observe(s));
+  }
+</script>
