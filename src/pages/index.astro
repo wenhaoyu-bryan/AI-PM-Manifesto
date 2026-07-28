@@ -1,10 +1,34 @@
 ---
 import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
+import agentAnatomyShot from "@/assets/proof/agent-anatomy.png";
 import ontologyShot from "@/assets/proof/prompt-to-ontology.png";
 import playbookShot from "@/assets/proof/ai-pm-playbook.png";
+import { SITE, PROOF } from "@/data/proof";
 
 const PORTFOLIO = "https://wenhaoyu-bryan.github.io";
+
+// WebPage schema: names the page + its creator and mentions the three shipped
+// Proof projects, mirroring llms.txt for search engines and AI crawlers.
+const webPageJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: SITE.title,
+  description: SITE.description,
+  url: SITE.url,
+  creator: {
+    "@type": "Person",
+    name: SITE.author,
+    url: SITE.portfolio,
+    jobTitle: "AI Product Manager",
+  },
+  mentions: PROOF.map(p => ({
+    "@type": "CreativeWork",
+    name: p.title,
+    url: p.url,
+    description: p.description,
+  })),
+});
 
 const method = [
   {
@@ -49,6 +73,13 @@ const quotes = [
 ---
 
 <Base>
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={webPageJsonLd}
+    slot="head"
+  />
+
   <!-- Ambient accent glows -->
   <div
     class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -156,6 +187,51 @@ const quotes = [
         class="mt-5 text-3xl font-semibold tracking-tight sm:text-5xl"
         data-reveal
       >
+        Agent Anatomy
+      </h2>
+      <p class="text-muted mt-6 max-w-2xl text-lg leading-relaxed" data-reveal>
+        An interactive visual essay on how AI agents actually work. A scripted
+        agent run, replayed live: the loop, the context window filling in real
+        time, a broken page healing fix by fix. Open source, with a trace format
+        anyone can write to.
+      </p>
+      <div class="mt-8" data-reveal>
+        <a
+          href="https://wenhaoyu-bryan.github.io/agent-anatomy/"
+          class="bg-fg inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-bg transition-transform hover:-translate-y-0.5"
+        >
+          Replay the agent run &rarr;
+        </a>
+      </div>
+      <div class="mt-14" data-reveal>
+        <div
+          class="overflow-hidden rounded-xl border border-black/10 shadow-[0_40px_100px_-35px_rgba(20,20,19,0.22)]"
+        >
+          <Image
+            src={agentAnatomyShot}
+            alt="Agent Anatomy — interactive explainer, Episode 01 landing"
+            widths={[640, 1000, 1600]}
+            sizes="(min-width: 1024px) 960px, 92vw"
+            class="w-full scale-[1.14] will-change-transform"
+            loading="lazy"
+            data-parallax
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · PROOF II -->
+    <section id="proof-2" class="border-t border-line py-28 sm:py-36">
+      <p
+        class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
+        data-reveal
+      >
+        Proof · 02
+      </p>
+      <h2
+        class="mt-5 text-3xl font-semibold tracking-tight sm:text-5xl"
+        data-reveal
+      >
         Prompt-to-Ontology
       </h2>
       <p class="text-muted mt-6 max-w-2xl text-lg leading-relaxed" data-reveal>
@@ -194,13 +270,13 @@ const quotes = [
       </div>
     </section>
 
-    <!-- 5 · PROOF II -->
-    <section id="proof-2" class="border-t border-line py-28 sm:py-36">
+    <!-- 6 · PROOF III -->
+    <section id="proof-3" class="border-t border-line py-28 sm:py-36">
       <p
         class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
         data-reveal
       >
-        Proof · 02
+        Proof · 03
       </p>
       <h2
         class="mt-5 text-3xl font-semibold tracking-tight sm:text-5xl"
@@ -238,7 +314,7 @@ const quotes = [
       </div>
     </section>
 
-    <!-- 6 · IN MY WORDS -->
+    <!-- 7 · IN MY WORDS -->
     <section id="words" class="border-t border-line py-28 sm:py-36">
       <p
         class="text-accent font-mono text-xs tracking-[0.25em] uppercase"
@@ -262,7 +338,7 @@ const quotes = [
       </div>
     </section>
 
-    <!-- 7 · CLOSE -->
+    <!-- 8 · CLOSE -->
     <section id="contact" class="border-t border-line py-28 sm:py-40">
       <h2
         class="text-4xl font-semibold tracking-tight text-balance sm:text-6xl"
